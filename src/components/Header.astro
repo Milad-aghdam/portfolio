@@ -1,29 +1,37 @@
 ---
 const currentPath = Astro.url.pathname;
+// We need to check if the path ends with a trailing slash to handle both cases
+// e.g., "/portfolio/about" and "/portfolio/about/"
+const normalizePath = (path: string) => path.replace(/\/$/, '');
+const current = normalizePath(currentPath);
 ---
 
 <header class="fixed top-0 w-full z-50 bg-[#1a1a1a]/80 backdrop-blur-sm">
   <nav class="container mx-auto px-6 py-6 flex items-center justify-between">
-    <a href="/" class="text-2xl font-bold tracking-wider hover:text-primary transition-colors">
+    <!-- Updated Logo Link -->
+    <a href="/portfolio/" class="text-2xl font-bold tracking-wider hover:text-primary transition-colors">
       MILAD<span class="text-gray-400">.</span>AI
     </a>
     
     <ul class="hidden md:flex items-center gap-12 text-sm tracking-wide text-gray-300">
       <li>
-        <a href="/" 
-           class={`hover:text-white transition-colors ${currentPath === '/' ? 'text-white' : ''}`}>
+        <!-- Updated Home Link & Logic -->
+        <a href="/portfolio/" 
+           class={`hover:text-white transition-colors ${current === '/portfolio' || current === '/portfolio/' ? 'text-white' : ''}`}>
           HOME
         </a>
       </li>
       <li>
-        <a href="/about" 
-           class={`hover:text-white transition-colors ${currentPath === '/about' ? 'text-white' : ''}`}>
+        <!-- Updated About Link & Logic -->
+        <a href="/portfolio/about" 
+           class={`hover:text-white transition-colors ${current.includes('/portfolio/about') ? 'text-white' : ''}`}>
           ABOUT
         </a>
       </li>
       <li>
-        <a href="/works" 
-           class={`hover:text-white transition-colors ${currentPath === '/works' ? 'text-white' : ''}`}>
+        <!-- Updated Works Link & Logic -->
+        <a href="/portfolio/works" 
+           class={`hover:text-white transition-colors ${current.includes('/portfolio/works') ? 'text-white' : ''}`}>
           PROJECTS
         </a>
       </li>
@@ -38,7 +46,8 @@ const currentPath = Astro.url.pathname;
         </svg>
       </a>
       
-      <a href="/contact" 
+      <!-- Updated Contact Button Link -->
+      <a href="/portfolio/contact" 
          class="px-8 py-3 border border-gray-600 rounded-full text-sm tracking-wide hover:border-primary hover:text-primary transition-colors">
         CONTACT
       </a>
@@ -55,10 +64,11 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden md:hidden bg-[#1a1a1a] border-t border-gray-800">
     <ul class="container mx-auto px-6 py-6 space-y-4">
-      <li><a href="/" class="block text-gray-300 hover:text-white">HOME</a></li>
-      <li><a href="/about" class="block text-gray-300 hover:text-white">ABOUT</a></li>
-      <li><a href="/works" class="block text-gray-300 hover:text-white">PROJECTS</a></li>
-      <li><a href="/contact" class="block text-gray-300 hover:text-white">CONTACT</a></li>
+      <!-- Updated Mobile Links -->
+      <li><a href="/portfolio/" class="block text-gray-300 hover:text-white">HOME</a></li>
+      <li><a href="/portfolio/about" class="block text-gray-300 hover:text-white">ABOUT</a></li>
+      <li><a href="/portfolio/works" class="block text-gray-300 hover:text-white">PROJECTS</a></li>
+      <li><a href="/portfolio/contact" class="block text-gray-300 hover:text-white">CONTACT</a></li>
     </ul>
   </div>
 </header>
