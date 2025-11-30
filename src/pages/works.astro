@@ -1,0 +1,27 @@
+---
+// src/pages/works.astro
+
+import Layout from '../layouts/Layout.astro';
+import Works from '../components/Works.astro';
+import Contact from '../components/Contact.astro'; // It's good practice to have a CTA
+---
+
+<Layout title="My Projects - Milad Ghashangi Aghdam">
+
+  <!-- The Header is added automatically by our improved Layout -->
+
+  <Works />
+
+  <!-- A "Call to Action" section is useful on the projects page -->
+  <section class="py-20 bg-[#151515]">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8">
+        Interested in working together?
+      </h2>
+      <a href="/contact" class="inline-flex items-center gap-3 px-10 py-4 bg-primary hover:bg-primary-hover rounded-full text-sm font-semibold tracking-wider transition-colors">
+        GET IN TOUCH
+      </a>
+    </div>
+  </section>
+
+</Layout>

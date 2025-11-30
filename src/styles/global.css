@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-[#121212] text-white font-rubik;
+}
+h1, h2, h3, h4, h5 {
+  @apply font-syne;
+}

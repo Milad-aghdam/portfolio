@@ -1,0 +1,64 @@
+---
+// src/components/Works.astro
+
+const projects = [
+  {
+    title: 'AI Personal Stylist Bot',
+    category: 'RAG Pipeline',
+    description: 'A Telegram AI stylist with a RAG pipeline (Mistral-7B + ChromaDB) to deliver personalized, searchable fashion recommendations.',
+    color: 'from-purple-900 to-pink-900',
+    link: 'https://github.com/Milad-aghdam/AI-Personal-Stylis' // <-- LINK ADDED
+  },
+  {
+    title: 'Kavosh-AI - Multilingual RAG Q&A System',
+    category: 'RAG System',
+    description: 'Built a multilingual (English/Persian) RAG system using LangChain and FAISS to extract verifiable, cited answers from academic PDFs via a Gradio web UI.',
+    color: 'from-teal-900 to-blue-900',
+    link: 'https://github.com/Milad-aghdam/Kavosh-ai' // <-- LINK ADDED
+  },
+  {
+    title: 'Specialized Translation Model',
+    category: 'Fine-Tuning LLM',
+    description: 'Created a custom translation engine by fine-tuning Llama 7B and Mistral 7B models using QLoRA and LoRA methods for resource-efficient training.',
+    color: 'from-indigo-900 to-blue-900',
+    link: '#' // No link provided for this one yet
+  }
+];
+---
+
+<!-- Hero Section for Projects Page -->
+<section class="pt-32 pb-20">
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8">
+        My Projects
+      </h1>
+      <p class="text-gray-400 text-xl leading-relaxed">
+        A selection of projects demonstrating my expertise in Retrieval-Augmented Generation, Large Language Models, and building intelligent AI systems.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="pb-20">
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <a href={project.link} target="_blank" rel="noopener noreferrer" class="group block">
+          <div class={`relative aspect-video rounded-3xl overflow-hidden bg-gradient-to-br ${project.color} mb-6`}>
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="text-white text-lg font-semibold">View Project</span>
+            </div>
+          </div>
+          
+          <div class="space-y-2">
+            <span class="text-primary text-sm font-semibold">{project.category}</span>
+            <h3 class="text-2xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+            <p class="text-gray-400">{project.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
