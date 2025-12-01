@@ -1,21 +1,39 @@
 ---
 const projects = [
   {
-    title: "AI-Powered Q&A System",
-    description: "Engineered a location-based Q&A system for 10K+ business records using RAG and LLMs.",
-    tags: ["Python", "LangChain", "OpenAI", "PostgreSQL"],
-    link: "#", 
+    title: "Kavosh-AI: Multilingual RAG System",
+    description: "Built a multilingual (English/Persian) RAG system using LangChain and FAISS to extract verifiable, cited answers from academic PDFs via a Gradio web UI.",
+    tags: ["LangChain", "FAISS", "Gradio", "RAG"],
+    link: "https://github.com/Milad-aghdam/Kavosh-ai",
   },
   {
-    title: "MRI Image Analysis",
-    description: "Developed deep learning models for MRI image analysis to improve disease prediction accuracy.",
-    tags: ["PyTorch", "Computer Vision", "Medical AI"],
+    title: "AI Personal Stylist Bot",
+    description: "Created a Telegram AI stylist with a RAG pipeline (Mistral-7B + ChromaDB) to deliver personalized, searchable fashion recommendations.",
+    tags: ["Mistral-7B", "ChromaDB", "Telegram API", "GenAI"],
+    link: "https://github.com/Milad-aghdam/AI-Personal-Stylist",
+  },
+  {
+    title: "Specialized Translation LLM",
+    description: "Fine-tuned Llama 7B and Mistral 7B models using QLoRA and LoRA for resource-efficient training, achieving high translation accuracy on private datasets.",
+    tags: ["PyTorch", "QLoRA", "Hugging Face", "LLMs"],
     link: "#",
   },
   {
-    title: "Odoo ERP Customization",
-    description: "Orchestrated the design and deployment of 10 Odoo modules for workflow automation.",
-    tags: ["Python", "Odoo", "Docker", "PostgreSQL"],
+    title: "Geospatial RAG Q&A Engine",
+    description: "Architected a location-based Q&A system for 10K+ business records using embeddings and geospatial SQL filtering with a reranking step.",
+    tags: ["Python", "SQL", "Embeddings", "Data Engineering"],
+    link: "#",
+  },
+  {
+    title: "Deep Learning for MRI Analysis",
+    description: "Contributed to research prototypes for MRI image analysis, improving disease prediction accuracy by double-digit percentages.",
+    tags: ["Computer Vision", "Deep Learning", "PyTorch", "Healthcare"],
+    link: "#",
+  },
+  {
+    title: "Odoo ERP Automation",
+    description: "Orchestrated the design and deployment of 10 Odoo modules and automated workflows across 5 departments, optimizing processes for 20+ employees.",
+    tags: ["Python", "Odoo", "PostgreSQL", "Docker"],
     link: "#",
   }
 ];
@@ -24,26 +42,39 @@ const projects = [
 <section id="works" class="py-20 bg-[#151515]">
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">Selected Works</h2>
-      <p class="text-gray-400 text-lg">A collection of my recent projects in AI and Software Engineering</p>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Selected Projects</h2>
+      <p class="text-gray-400 text-lg">
+        A showcase of my work in AI Engineering, RAG Systems, and Software Development.
+      </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {projects.map((project) => (
-        <div class="bg-[#1a1a1a] rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 border border-gray-800 hover:border-primary/50 group">
-          <div class="mb-6">
-            <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
-            <p class="text-gray-400 leading-relaxed mb-6">{project.description}</p>
+        <a href={project.link} target="_blank" class="block group">
+          <div class="h-full bg-[#1a1a1a] rounded-2xl p-8 border border-gray-800 hover:border-primary/50 hover:transform hover:-translate-y-2 transition-all duration-300 flex flex-col">
+            <div class="mb-auto">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+                <svg class="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                {project.description}
+              </p>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 mt-4">
+              {project.tags.map((tag) => (
+                <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full border border-gray-700 group-hover:border-gray-600 transition-colors">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
-          
-          <div class="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full border border-gray-700">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
+        </a>
       ))}
     </div>
   </div>
