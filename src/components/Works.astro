@@ -1,24 +1,50 @@
 ---
-
-
-import Layout from '../layouts/Layout.astro';
-import Works from '../components/Works.astro';
+const projects = [
+  {
+    title: "AI-Powered Q&A System",
+    description: "Engineered a location-based Q&A system for 10K+ business records using RAG and LLMs.",
+    tags: ["Python", "LangChain", "OpenAI", "PostgreSQL"],
+    link: "#", 
+  },
+  {
+    title: "MRI Image Analysis",
+    description: "Developed deep learning models for MRI image analysis to improve disease prediction accuracy.",
+    tags: ["PyTorch", "Computer Vision", "Medical AI"],
+    link: "#",
+  },
+  {
+    title: "Odoo ERP Customization",
+    description: "Orchestrated the design and deployment of 10 Odoo modules for workflow automation.",
+    tags: ["Python", "Odoo", "Docker", "PostgreSQL"],
+    link: "#",
+  }
+];
 ---
 
-<Layout title="My Projects - Milad Ghashangi Aghdam">
-
-
-  <Works />
-
-  <section class="py-20 bg-[#151515]">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-4xl md:text-5xl font-bold mb-8">
-        Interested in working together?
-      </h2>
-      <a href="/portfolio/contact" class="inline-flex items-center gap-3 px-10 py-4 bg-primary hover:bg-primary-hover rounded-full text-sm font-semibold tracking-wider transition-colors">
-        GET IN TOUCH
-      </a>
+<section id="works" class="py-20 bg-[#151515]">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Selected Works</h2>
+      <p class="text-gray-400 text-lg">A collection of my recent projects in AI and Software Engineering</p>
     </div>
-  </section>
 
-</Layout>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <div class="bg-[#1a1a1a] rounded-2xl p-8 hover:transform hover:-translate-y-2 transition-all duration-300 border border-gray-800 hover:border-primary/50 group">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
+            <p class="text-gray-400 leading-relaxed mb-6">{project.description}</p>
+          </div>
+          
+          <div class="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full border border-gray-700">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
