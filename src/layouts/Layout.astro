@@ -1,15 +1,12 @@
 ---
-
 interface Props {
   title: string;
 }
 const { title } = Astro.props;
 
-
 import { ViewTransitions } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
 ---
 
 <!doctype html>
@@ -21,7 +18,19 @@ import Footer from '../components/Footer.astro';
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    
     <ViewTransitions />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HTBWZLKXHD"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-HTBWZLKXHD');
+    </script>
+    
   </head>
   <body class="bg-[#1a1a1a] text-white">
 
