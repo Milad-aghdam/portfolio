@@ -1,9 +1,206 @@
 ---
-// src/pages/about.astro
 import Layout from '../layouts/Layout.astro';
-import About from '../components/About.astro';
+
+const experiences = [
+  { period: "Jan 2025 - Present", location: "Tabriz, Iran", role: "Software Engineer", company: "Nagsh Film", description: "Orchestrated the design and deployment of 10 Odoo modules and delivered ERP customization that automated workflows. Implemented real-time BI dashboards in Power BI, improving data visualization and automating reporting." },
+  { period: "Nov 2024 - Aug 2025", location: "Remote, Part-time", role: "AI Developer (Healthcare Data)", company: "Azmayeshgah Khayyam", description: "Developed deep learning models for MRI image analysis with a cross-functional team. Contributed to 3 research prototypes, improving disease prediction accuracy and supporting faster diagnostics." },
+  { period: "Nov 2022 - Nov 2024", location: "Scotland (Remote)", role: "Data Analyst / AI Developer", company: "Mealzo", description: "Engineered a location-based Q&A system for 10K+ business records. Developed 5+ interactive Power BI dashboards, cutting reporting time by 60%." }
+];
+
+const certifications = [
+    "LLM Agents, Hugging Face",
+    "Data Science Professional, University of Tehran",
+    "SQL for Data Science, University of California - Coursera",
+    "Mathematics for Machine Learning: Linear Algebra, Coursera"
+];
 ---
 
-<Layout title="About Me - Milad Ghashangi Aghdam">
-  <About />
+<Layout title="About - Milad Ghashangi Aghdam">
+
+  <!-- TRENDY HERO SECTION -->
+  <section class="min-h-[80vh] flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
+    
+    <!-- Ambient Background Glows -->
+    <div class="absolute top-20 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+        
+        <!-- Left: Text Content -->
+        <div class="flex-1 text-center md:text-left order-2 md:order-1">
+          
+          <!-- Status Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#252525] border border-gray-800 text-xs font-medium text-green-400 mb-6">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            Available for new opportunities
+          </div>
+
+          <h1 class="text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+            Hi, I'm <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
+              Milad Ghashangi Aghdam.
+            </span>
+          </h1>
+          
+          <p class="text-xl text-gray-400 mb-8 leading-relaxed max-w-xl mx-auto md:mx-0">
+            AI Engineer bridging the gap between <span class="text-white font-semibold">Complex Data</span> and <span class="text-white font-semibold">Business Value</span>. Specializing in RAG systems, LLMs, and scalable Software Architecture.
+          </p>
+
+          <div class="flex flex-wrap justify-center md:justify-start gap-4">
+            <a href="/portfolio/works" class="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all transform hover:-translate-y-1">
+              View Projects
+            </a>
+            <a href="/portfolio/Milad_Ghashangi_Aghdam_Resume.pdf" download class="px-8 py-4 bg-[#1a1a1a] text-white border border-gray-700 font-bold rounded-full hover:border-primary hover:text-primary transition-all">
+              Download CV
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Image with Glass Effect -->
+        <div class="flex-1 relative order-1 md:order-2">
+          <div class="relative w-72 h-72 md:w-96 md:h-96 mx-auto">
+            <!-- Rotating border effect -->
+            <div class="absolute inset-0 rounded-full border border-gray-700"></div>
+            <div class="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-xl opacity-70"></div>
+            
+            <img 
+              src="/portfolio/pro.jpg" 
+              alt="Milad Ghashangi Aghdam" 
+              class="w-full h-full object-cover rounded-full border-4 border-[#1a1a1a] shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-500" 
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="py-20 bg-[#151515]">
+      <div class="container mx-auto px-6">
+          <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">Technical Arsenal</h2>
+          <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <!-- Skill Card 1 -->
+              <div class="bg-[#1a1a1a] p-8 rounded-3xl border border-gray-800 hover:border-primary/50 transition-colors">
+                <h3 class="text-2xl font-bold mb-4 text-white">ML & AI</h3>
+                <div class="space-y-3 text-gray-400">
+                  <p><strong class="text-white">Core:</strong> PyTorch, Scikit-learn, Hugging Face</p>
+                  <p><strong class="text-white">GenAI:</strong> RAG, LangChain, Llama3, PEFT (LoRA)</p>
+                </div>
+              </div>
+
+              <!-- Skill Card 2 -->
+              <div class="bg-[#1a1a1a] p-8 rounded-3xl border border-gray-800 hover:border-primary/50 transition-colors">
+                <h3 class="text-2xl font-bold mb-4 text-white">Engineering</h3>
+                <div class="space-y-3 text-gray-400">
+                  <p><strong class="text-white">Languages:</strong> Python, SQL</p>
+                  <p><strong class="text-white">Tools:</strong> Odoo, Docker, Git, Web Scraping</p>
+                </div>
+              </div>
+
+              <!-- Skill Card 3 -->
+              <div class="bg-[#1a1a1a] p-8 rounded-3xl border border-gray-800 hover:border-primary/50 transition-colors">
+                <h3 class="text-2xl font-bold mb-4 text-white">Data & BI</h3>
+                <div class="space-y-3 text-gray-400">
+                  <p><strong class="text-white">Visualization:</strong> Microsoft Power BI</p>
+                  <p><strong class="text-white">Database:</strong> PostgreSQL, MySQL, Vector DBs</p>
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="py-20 relative">
+      <div class="container mx-auto px-6">
+          <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">Work History</h2>
+          
+          <div class="max-w-4xl mx-auto space-y-6">
+              {experiences.map((job) => (
+                  <div class="group relative bg-[#1a1a1a] p-8 rounded-3xl border border-gray-800 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,152,83,0.1)]">
+                      
+                      <!-- Decorative corner accent -->
+                      <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                      </div>
+
+                      <div class="flex flex-col md:flex-row gap-6 md:gap-10">
+                        
+                        <!-- Left: Date & Location (Tech Font) -->
+                        <div class="md:w-48 flex-shrink-0 flex flex-col justify-start">
+                          <span class="inline-block self-start px-3 py-1 bg-primary/10 text-primary text-xs font-mono rounded border border-primary/20 mb-2">
+                            {job.period}
+                          </span>
+                          <span class="text-gray-500 text-xs font-mono flex items-center gap-2">
+                            {job.location}
+                          </span>
+                        </div>
+
+                        <!-- Right: Content -->
+                        <div>
+                          <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">
+                            {job.role}
+                          </h3>
+                          <p class="text-lg text-gray-300 mb-4 font-medium">{job.company}</p>
+                          <p class="text-gray-400 leading-relaxed text-sm border-l-2 border-gray-800 pl-4 group-hover:border-primary/50 transition-colors">
+                            {job.description}
+                          </p>
+                        </div>
+
+                      </div>
+                  </div>
+              ))}
+          </div>
+      </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section class="py-20 bg-[#151515]">
+      <div class="container mx-auto px-6 text-center">
+          <h2 class="text-4xl md:text-5xl font-bold mb-12">Certifications</h2>
+          <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+              {certifications.map(cert => (
+                  <span class="px-6 py-3 bg-[#252525] rounded-full text-gray-300 border border-gray-700 hover:border-primary transition-colors cursor-default">
+                    {cert}
+                  </span>
+              ))}
+          </div>
+      </div>
+  </section>
+<!-- Current Focus / Learning Section -->
+  <section class="py-10">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto bg-gradient-to-r from-[#1a1a1a] to-[#202020] rounded-3xl p-8 border border-gray-800 relative overflow-hidden">
+        
+        <!-- Decorative Glow -->
+        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <div class="flex-shrink-0">
+            <div class="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+          </div>
+          
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <h2 class="text-2xl font-bold text-white">Current Focus</h2>
+              <span class="px-3 py-1 bg-green-500/10 text-green-400 text-[10px] font-bold tracking-wider uppercase rounded-full border border-green-500/20 animate-pulse">
+                Active Learning
+              </span>
+            </div>
+            <p class="text-gray-400 leading-relaxed">
+              Currently optimizing the <strong class="text-white">Kavosh-AI architecture</strong> to improve retrieval latency and context precision. Deep diving into <strong class="text-white">Advanced RAG methodologies</strong>, specifically focusing on Hybrid Search implementation and Re-ranking strategies to minimize hallucination rates.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </Layout>
