@@ -1,10 +1,37 @@
 ---
+interface Props {
+  /** Extra top padding and full-list title when this is the /works page. */
+  standalone?: boolean;
+  /** Show only the first N projects (Home). Omit to show all. */
+  limit?: number;
+}
+const { standalone = false, limit } = Astro.props;
+
 const projects = [
+  {
+    title: "Multi-Agent HR Automation System",
+    description: "Built a multi-agent system automating recruitment, onboarding, employee services, and workforce management on top of Odoo 17. Implemented agent orchestration, permission-scoped tools, human-in-the-loop approvals, audit trails, and failure recovery.",
+    tags: ["LangGraph", "Multi-Agent", "MCP", "Human-in-the-Loop", "Odoo 17"],
+    link: "#",
+    featured: true,
+  },
   {
     title: "Kavosh-AI: Multilingual RAG System",
     description: "Built a multilingual (English/Persian) RAG system using LangChain and FAISS to extract verifiable, cited answers from academic PDFs via a Gradio web UI.",
     tags: ["LangChain", "FAISS", "Gradio", "RAG"],
     link: "https://github.com/Milad-aghdam/Kavosh-ai",
+  },
+  {
+    title: "Natural-Language Data Access via MCP",
+    description: "Built an MCP server exposing a production Odoo ERP to LLM agents, letting non-technical employees query and validate business data across modules in natural language. Used by 20+ employees across 5 departments.",
+    tags: ["MCP", "LLM Agents", "Tool Calling", "Python", "PostgreSQL"],
+    link: "#",
+  },
+  {
+    title: "Geospatial RAG Q&A Engine",
+    description: "Architected a location-based Q&A system for 10K+ business records using embeddings and geospatial SQL filtering with a reranking step.",
+    tags: ["Python", "SQL", "Embeddings", "Data Engineering"],
+    link: "#",
   },
   {
     title: "AI Personal Stylist Bot",
@@ -16,81 +43,97 @@ const projects = [
     title: "Specialized Translation LLM",
     description: "Fine-tuned Llama 7B and Mistral 7B models using QLoRA and LoRA for resource-efficient training, achieving high translation accuracy on private datasets.",
     tags: ["PyTorch", "QLoRA", "Hugging Face", "LLMs"],
-    link: "#", 
-  },
-  {
-    title: "Geospatial RAG Q&A Engine",
-    description: "Architected a location-based Q&A system for 10K+ business records using embeddings and geospatial SQL filtering with a reranking step.",
-    tags: ["Python", "SQL", "Embeddings", "Data Engineering"],
-    link: "#", 
+    link: "#",
   },
   {
     title: "Deep Learning for MRI Analysis",
     description: "Contributed to research prototypes for MRI image analysis, improving disease prediction accuracy by double-digit percentages.",
     tags: ["Computer Vision", "Deep Learning", "PyTorch", "Healthcare"],
-    link: "#", 
+    link: "#",
   },
-  {
-    title: "Enterprise Workflow Automation",
-    description: "Architected and deployed 10+ Python-based automation modules across 5 departments, streamlining operations and optimizing processes for 20+ employees.",
-    tags: ["Python", "PostgreSQL", "Docker", "REST APIs"],
-    link: "#", 
-  }
 ];
+
+const visibleProjects = limit ? projects.slice(0, limit) : projects;
+const hasMore = visibleProjects.length < projects.length;
 ---
 
-<section id="works" class="py-20 bg-[#151515]">
+<section id="works" class:list={["pb-20 bg-[#151515]", standalone ? "pt-36" : "pt-20"]}>
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">Selected Projects</h2>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        {standalone ? "Projects" : "Selected Projects"}
+      </h2>
       <p class="text-gray-400 text-lg">
         A showcase of my work in AI Engineering, RAG Systems, and Software Development.
       </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {projects.map((project) => (
-        project.link === "#" ? (
-          <div class="h-full bg-[#1a1a1a] rounded-2xl p-8 border border-gray-800 flex flex-col cursor-default">
-            <div class="mb-auto">
-              <div class="flex justify-between items-start mb-4">
-                <h3 class="text-xl font-bold text-white">
-                  {project.title}
-                </h3>
-                <!-- No Icon for private projects (or a Lock icon if you prefer) -->
-                <span class="text-xs font-mono text-gray-600 bg-gray-900 px-2 py-1 rounded border border-gray-800">Private</span>
-              </div>
-              <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                {project.description}
-              </p>
-            </div>
-            
-            <div class="flex flex-wrap gap-2 mt-4">
-              {project.tags.map((tag) => (
-                <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full border border-gray-700">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <a href={project.link} target="_blank" class="block group h-full">
-            <div class="h-full bg-[#1a1a1a] rounded-2xl p-8 border border-gray-800 hover:border-primary/50 hover:transform hover:-translate-y-2 transition-all duration-300 flex flex-col">
-              <div class="mb-auto">
-                <div class="flex justify-between items-start mb-4">
-                  <h3 class="text-xl font-bold group-hover:text-primary transition-colors">
+      {visibleProjects.map((project, index) => {
+        const isPrivate = project.link === "#";
+        const isFeatured = Boolean(project.featured);
+        // On tablet (2 columns) a lone last card would leave a gap; let it span the row.
+        const fillsTabletRow =
+          !isFeatured &&
+          index === visibleProjects.length - 1 &&
+          visibleProjects.filter((p) => !p.featured).length % 2 === 1;
+        const Card = isPrivate ? "div" : "a";
+        const linkProps = isPrivate
+          ? {}
+          : { href: project.link, target: "_blank", rel: "noopener noreferrer" };
+
+        return (
+          <Card
+            {...linkProps}
+            class:list={[
+              "group h-full rounded-2xl p-8 border flex flex-col transition-all duration-300",
+              isFeatured
+                ? "md:col-span-2 lg:col-span-3 bg-gradient-to-br from-primary/10 via-[#1a1a1a] to-[#1a1a1a] border-primary/30"
+                : "bg-[#1a1a1a] border-gray-800",
+              fillsTabletRow && "md:col-span-2 lg:col-span-1",
+              isPrivate
+                ? "cursor-default"
+                : "hover:border-primary/50 hover:-translate-y-2",
+            ]}
+          >
+            <div class:list={["mb-auto", isFeatured && "lg:flex lg:items-start lg:gap-12"]}>
+              <div class:list={[isFeatured && "lg:flex-1"]}>
+                {isFeatured && isPrivate && (
+                  <span class="inline-block mb-3 text-xs font-mono text-gray-400 bg-gray-800 px-2 py-1 rounded border border-gray-700">
+                    Private
+                  </span>
+                )}
+                <div class="flex justify-between items-start gap-3 mb-4">
+                  <h3
+                    class:list={[
+                      "font-bold text-white transition-colors",
+                      isFeatured ? "text-2xl md:text-3xl" : "text-xl",
+                      !isPrivate && "group-hover:text-primary",
+                    ]}
+                  >
                     {project.title}
                   </h3>
-                  <svg class="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                  {isFeatured ? null : isPrivate ? (
+                    <span class="flex-shrink-0 text-xs font-mono text-gray-400 bg-gray-800 px-2 py-1 rounded border border-gray-700">
+                      Private
+                    </span>
+                  ) : (
+                    <svg class="w-5 h-5 flex-shrink-0 mt-1 text-gray-500 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  )}
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                <p
+                  class:list={[
+                    "text-gray-400 leading-relaxed mb-6",
+                    isFeatured ? "text-base max-w-3xl lg:mb-0" : "text-sm",
+                  ]}
+                >
                   {project.description}
                 </p>
               </div>
-              
-              <div class="flex flex-wrap gap-2 mt-4">
+
+              <div class:list={["flex flex-wrap gap-2 mt-4", isFeatured && "lg:w-72 lg:flex-shrink-0 lg:mt-0 lg:self-center lg:justify-end"]}>
                 {project.tags.map((tag) => (
                   <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full border border-gray-700 group-hover:border-gray-600 transition-colors">
                     {tag}
@@ -98,9 +141,23 @@ const projects = [
                 ))}
               </div>
             </div>
-          </a>
-        )
-      ))}
+          </Card>
+        );
+      })}
     </div>
+
+    {hasMore && (
+      <div class="text-center mt-12">
+        <a
+          href="/portfolio/works"
+          class="inline-flex items-center gap-3 px-10 py-4 border border-gray-600 hover:border-primary hover:text-primary rounded-full text-sm font-semibold tracking-wider transition-colors"
+        >
+          VIEW ALL PROJECTS
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    )}
   </div>
 </section>

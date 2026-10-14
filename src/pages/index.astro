@@ -3,14 +3,14 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Works from '../components/Works.astro';
-import Testimonial from '../components/Testimonial.astro'; 
+import Testimonial from '../components/Testimonial.astro';
 import Contact from '../components/Contact.astro';
 ---
 
 <Layout title="Milad Ghashangi Aghdam - AI Engineer">
-  
+
   <Hero />
-  <Works />
+  <Works limit={4} />
   <Testimonial />
   <Contact />
 
